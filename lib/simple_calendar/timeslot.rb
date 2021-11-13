@@ -2,4 +2,5 @@
 
 require_relative "timeslot/version"
 require_relative "timeslot/timeslot_calendar"
+require_relative "timeslot/railtie"
 require_relative "timeslot/view_helpers"
