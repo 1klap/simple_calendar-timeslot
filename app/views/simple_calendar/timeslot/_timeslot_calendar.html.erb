@@ -1,0 +1,139 @@
+<div class="slotted-calendar">
+  <div class="calendar-heading">
+    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
+    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
+    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
+  </div>
+
+  <% if calendar.orientation == :vertical %>
+    <div class="flex flex-row">
+      <% date_range.slice(0, 7).each do |day| %>
+        <div class="flex-1 border-0 border-gray-500 border-opacity-25">
+          <div class="day-title-row">
+            <span class="day-weekday">
+              <%= t('date.abbr_day_names')[day.wday] %>
+            </span>
+            <span class="day-date">
+              <%= day %>
+            </span>
+          </div>
+          <%= content_tag :div, class: calendar.td_classes_for(day) do %>
+            <div class="flex flex-col relative" style="height:<%=calendar.height%>px;">
+              <% if calendar.display_grid %>
+                <div class="cal-hour-indicator-col flex-1 flex flex-col" style="z-index:-10;">
+                  <% if calendar.display_bucket_title %>
+                    <div class="bucket-title" style="height:<%=calendar.bucket_title_size%>px"></div>
+                  <% end %>
+                  <% (0..23).each do |hour| %>
+                    <div class="cal-hour-indicator border-t-2 border-gray-200 border-opacity-50 flex-1" id="hour-<%=hour %>">
+                      <%=hour%>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+              <% events = sorted_events.fetch(day, []) %>
+              <% buckets = calendar.split_into_buckets(events) %>
+              <div class="absolute" style="left:<%=calendar.grid_width%>;right:0">
+                <div class="buckets w-full flex flex-row bg-white" style="z-index:1;">
+                  <% buckets.each do |bucket| %>
+                    <div class="flex-1">
+                      <div class="bucket">
+                        <% if calendar.display_bucket_title %>
+                          <div class="bucket-title" style="height:<%=calendar.bucket_title_size%>px">
+                            <%= bucket&.first&.send calendar.display_bucket_title %>
+                          </div>
+                        <% end %>
+                        <div class="relative">
+                          <% events_size = calendar.slot_events(bucket, day) %>
+                          <% bucket.each do |event| %>
+                            <div class="absolute border-2 border-opacity-25 border-red-500 bg-white rounded box-border hover:w-full" style="z-index:20;width:<%=events_size[event][0]%>%;top:<%=events_size[event][3]%>px;left:<%=events_size[event][1]%>%;height:<%=events_size[event][2]%>px">
+                              <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
+                                <% capture_haml(event, &passed_block) %>
+                              <% else %>
+                                <% passed_block.call event %>
+                              <% end %>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% elsif calendar.orientation == :horizontal %>
+    <div class="flex flex-col">
+      <% date_range.slice(0, 7).each do |day| %>
+        <div class="flex-1 border-0 border-gray-500 border-opacity-25">
+          <div class="day-title-row">
+            <span class="day-weekday">
+              <%= t('date.abbr_day_names')[day.wday] %>
+            </span>
+            <span class="day-date">
+              <%= day %>
+            </span>
+          </div>
+          <%= content_tag :div, class: calendar.td_classes_for(day) do %>
+            <div class="flex flex-col overflow-x-auto">
+              <div class="relative" style="width:<%=calendar.height%>px;height:<%=calendar.horizontal_height_px%>px">
+                <% if calendar.display_grid %>
+                  <div class="cal-hour-indicator-col flex-1 flex flex-row h-full" style="z-index:-10;">
+                    <% if calendar.display_bucket_title %>
+                      <div class="bucket-title" style="width:<%=calendar.bucket_title_size%>px;"></div>
+                    <% end %>
+                    <% (0..23).each do |hour| %>
+                      <div class="cal-hour-indicator border-l-2 border-gray-200 border-opacity-50 flex-1" id="hour-<%=hour %>">
+                        <div style="height:20px">
+                          <%=hour%>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+                <% events = sorted_events.fetch(day, []) %>
+                <% buckets = calendar.split_into_buckets(events) %>
+                <div class="absolute" style="top:<%=calendar.grid_width%>;bottom:0">
+                  <div class="buckets flex flex-col bg-white absolute" >
+                    <% buckets.each do |bucket| %>
+                      <div class="flex-1 flex flex-row">
+                        <% if calendar.display_bucket_title %>
+                          <div class="bucket-title-size-wrap" style="width:<%=calendar.bucket_title_size%>px;">
+                            <div class="bucket-title-text-wrapper">
+                              <div class="bucket-title-text">
+                                <%= bucket&.first&.send calendar.display_bucket_title %>
+                              </div>
+                            </div>
+                          </div>
+                        <% end %>
+                        <div class="bucket relative" style="height:<%=(calendar.horizontal_height_px-(calendar.display_grid ? 20 : 0)) / buckets.size%>px;">
+                          <div class="w-full">
+                            <% events_size = calendar.slot_events(bucket, day) %>
+                            <% bucket.each do |event| %>
+                              <div class="absolute border-2 border-opacity-25 border-red-500 bg-white rounded box-border" style="height:<%=events_size[event][0]%>%;left:<%=events_size[event][3]%>px;top:<%=events_size[event][1]%>%;width:<%=events_size[event][2]%>px">
+                                <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
+                                  <% capture_haml(event, &passed_block) %>
+                                <% else %>
+                                  <% passed_block.call event %>
+                                <% end %>
+                              </div>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div>Unsupported orientation: <%= calendar.orientation %></div>
+  <% end %>
+</div>

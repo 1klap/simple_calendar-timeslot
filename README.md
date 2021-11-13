@@ -1,8 +1,11 @@
 # SimpleCalendar::Timeslot
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/simple_calendar/timeslot`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is an extension of the rubygem `simple_calendar` by Chris Oliver aka excid3. It allows 
+for simple calendar creation in a Ruby on Rails app with an timeslot representation of events 
+in a 24h day. This helps to visually grasps the length of events and the time between them. In case of overlapping, the respective events are shown side-by-side. It is also possible to categorise events in buckets according to some function, then they will be shown next to one another in the 24h timeline.
+Horizontal and vertical layout is selectable via options, just like many other ones.
 
-TODO: Delete this and the text above, and describe your gem
+TODO: show examples
 
 ## Installation
 
@@ -32,4 +35,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/simple_calendar-timeslot.
+Bug reports and pull requests are welcome on GitHub at https://github.com/1klap/simple_calendar-timeslot.

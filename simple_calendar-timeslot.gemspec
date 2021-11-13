@@ -30,8 +30,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency gem 'simple_calendar', '~> 2.0'
-
-  # For more information and examples about making a new gem, checkout our
-  # guide at: https://bundler.io/guides/creating_gem.html
+  spec.add_dependency 'simple_calendar', '~> 2.0'
+  #spec.add_development_dependency 'rails'
+  spec.add_development_dependency "rspec", "~> 3.2"
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rubocop'
 end
