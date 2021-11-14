@@ -34,7 +34,7 @@ Or install it yourself as:
 
 **Important** Then include the stylesheet in your rails app.
 
-If you an `application.css` file, include the following:
+If you have an `application.css` file, include the following:
 ```ruby
 *= require simple_calendar-timeslot
 ```
