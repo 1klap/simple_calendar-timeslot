@@ -1,5 +1,13 @@
 ## [Unreleased]
 
+## [0.5.0] - 2021-11-14
+- Removed images for the README from the gem, sry :(
+
+## [0.4.0] - 2021-11-14
+### Added
+- Added compatibilty with the attribute and end_attribute options in the view helper
+- Added documentation to README
+
 ## [0.3.0] - 2021-11-14
 ### Fixed
 - Fix issue with css styles when including style of this gem and simple_calendar

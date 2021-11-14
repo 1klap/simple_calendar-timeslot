@@ -9,10 +9,10 @@ This helps to visually grasps the length of events and the time between them. In
 Horizontal and vertical layout is selectable via options, just like many other ones.
 
 Horizontal example
-![Horizontal Calendar](img/simple_calendar-timeslot_horizontal.png)
+![Horizontal Calendar](https://github.com/1klap/simple_calendar-timeslot/blob/96475bf7c354b7e0318a9421e155588d96517fc3/img/simple_calendar-timeslot_horizontal.png?raw=true)
 
 Vertical example
-![Vertical Calendar](img/simple_calendar-timeslot_vertical.png)
+![Vertical Calendar](https://github.com/1klap/simple_calendar-timeslot/blob/96475bf7c354b7e0318a9421e155588d96517fc3/img/simple_calendar-timeslot_vertical.png?raw=true)
 
 
 ## Installation
@@ -34,7 +34,7 @@ Or install it yourself as:
 
 **Important** Then include the stylesheet in your rails app.
 
-If you an `application.css` file, include the following:
+If you have an `application.css` file, include the following:
 ```ruby
 *= require simple_calendar-timeslot
 ```
