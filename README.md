@@ -47,12 +47,17 @@ If you use an SCSS file (`application.scss`), add the following line instead:
 
 TODO: Write usage instructions here
 
+Your model must implement a `start_time` and `end_time` function,
+or you can specify alternatives as options to the call below
+as `attribute: :my_start_time` and `end_attribute: :my_end_time`.
+
 ```erb
 <%= timeslot_calendar(events: @events,
                       number_of_days: 2,
                       px_per_minute: 1.5,
                       orientation: :horizontal,
                       horizontal_height_px: 250,
+                      # attribute: :my_start_time,
                       # display_grid: false,
                       # display_bucket_title: :event_type,
                       # bucket_title_size: 30,
