@@ -23,6 +23,8 @@ Or install it yourself as:
 
     $ gem install simple_calendar-timeslot
 
+TODO: include stylesheet, show sprockets and scss usecases
+
 ## Usage
 
 TODO: Write usage instructions here
