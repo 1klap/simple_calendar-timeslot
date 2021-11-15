@@ -81,7 +81,7 @@ Shortversion in the meantime:
 - `bucket_title_size` default: 20
 - `grid_width` default: 20px
 - `display_grid` default: true
-- `current_time_indicator` (display a stylable div across the timeline that display the current time, css-class: `current_time_indicator`, default: false)
+- `display_current_time_indicator` (display a stylable div across the timeline that display the current time, css-class: `current_time_indicator`, default: false)
 
 ## Development
 
