@@ -9,6 +9,10 @@
   display: flex;
   flex-direction: column;
 }
+.timeslot-calendar .days-wrapper-horizontal.scroll-link {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
 .timeslot-calendar .day-wrapper {
   flex: 1 1 0;
 }
@@ -21,6 +25,8 @@
   display: flex;
   flex-direction: column;
   position: relative;
+}
+.timeslot-calendar .day-content-horizontal.scroll-split {
   overflow-x: auto;
   overflow-y: hidden;
 }

@@ -50,6 +50,10 @@ module SimpleCalendar
         @options.fetch(:display_grid, true)
       end
 
+      def horizontal_scroll_split
+        @options.fetch(:horizontal_scroll_split, false)
+      end
+
       def height
         #h = (24 - TimeslotCalendar::FIRST_HOUR_SLOT) * 60 * px_per_minute
         h = 24 * 60 * px_per_minute

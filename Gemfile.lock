@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple_calendar-timeslot (0.5.1)
+    simple_calendar-timeslot (0.6.0)
       simple_calendar (~> 2.0)
 
 GEM
