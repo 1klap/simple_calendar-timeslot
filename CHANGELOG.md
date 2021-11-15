@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.5.1] - 2021-11-15
+### Fixed
+- Fixed reliance of calendar on legacy function to
+calculate event height
+
 ## [0.5.0] - 2021-11-14
 - Removed images for the README from the gem, sry :(
 

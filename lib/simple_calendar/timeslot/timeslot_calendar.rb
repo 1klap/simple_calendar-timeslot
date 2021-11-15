@@ -63,9 +63,9 @@ module SimpleCalendar
                   elsif event.send(attribute).to_date < event.send(end_attribute).to_date
                     (event.send(end_attribute).midnight - 60 - event.send(attribute))/60
                   else
-                    event.duration
+                    (event.send(end_attribute) - event.send(attribute))/60
                   end
-        minutes * px_per_minute
+        minutes * px_per_minute 
       end
 
       def event_top_distance(event, day)
