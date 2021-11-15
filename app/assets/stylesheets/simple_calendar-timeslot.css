@@ -33,7 +33,6 @@
 .timeslot-calendar .day-content-horizontal-inner {
   position: relative;
 }
-
 .timeslot-calendar .hour-indicator-col-vertical {
   display: flex;
   flex: 1 1 0;
@@ -92,6 +91,9 @@
   position: absolute;
   z-index: 1;
   box-sizing: border-box;
+}
+.timeslot-calendar .current_time_indicator {
+  position: absolute;
 }
 /*--- Event example style ----*/
 .timeslot-event {

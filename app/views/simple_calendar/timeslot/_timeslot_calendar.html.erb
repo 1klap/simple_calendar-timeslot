@@ -31,6 +31,9 @@
                   <% end %>
                 </div>
               <% end %>
+              <% if calendar.display_current_time_indicator %>
+                  <div class="current_time_indicator" style="top:<%=calendar.current_time_offset %>px;left:0;right:0;height:0;"></div>
+                <% end %>
               <% events = sorted_events.fetch(day, []) %>
               <% buckets = calendar.split_into_buckets(events) %>
               <div class="buckets-wrapper" style="left:<%=calendar.grid_width%>;right:0">
@@ -46,7 +49,7 @@
                         <div class="events-wrapper">
                           <% events_size = calendar.slot_events(bucket, day) %>
                           <% bucket.each do |event| %>
-                            <div class="event-wrapper" style="z-index:20;width:<%=events_size[event][0]%>%;top:<%=events_size[event][3]%>px;left:<%=events_size[event][1]%>%;height:<%=events_size[event][2]%>px">
+                            <div class="event-wrapper" style="width:<%=events_size[event][0]%>%;top:<%=events_size[event][3]%>px;left:<%=events_size[event][1]%>%;height:<%=events_size[event][2]%>px">
                               <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
                                 <% capture_haml(event, &passed_block) %>
                               <% else %>
@@ -93,6 +96,9 @@
                       </div>
                     <% end %>
                   </div>
+                <% end %>
+                <% if calendar.display_current_time_indicator && !calendar.horizontal_scroll_split %>
+                  <div class="current_time_indicator" style="left:<%=calendar.current_time_offset %>px;top:0;bottom:0;width:0;"></div>
                 <% end %>
                 <% events = sorted_events.fetch(day, []) %>
                 <% buckets = calendar.split_into_buckets(events) %>

@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [0.7.0] - 2021-11-15
+### Added
+- new option to display a current time indicator line (based on Time.zone.now), that is invisible unless styled, the css-class is
+`current_time_indicator`
+### Fixed
+- minor z-index inconsistencies for event rendering
+
 ## [0.6.0] - 2021-11-15
 ### Added
 - Added option horizontal_scroll_split to view helper, which defaults to false. This option affects

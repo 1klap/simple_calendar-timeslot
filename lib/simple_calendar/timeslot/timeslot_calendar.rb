@@ -54,6 +54,10 @@ module SimpleCalendar
         @options.fetch(:horizontal_scroll_split, false)
       end
 
+      def display_current_time_indicator
+        @options.fetch(:display_current_time_indicator, false)
+      end
+
       def height
         #h = (24 - TimeslotCalendar::FIRST_HOUR_SLOT) * 60 * px_per_minute
         h = 24 * 60 * px_per_minute
@@ -121,6 +125,13 @@ module SimpleCalendar
           pack_events(r, columns)
         end
         r
+      end
+
+      def current_time_offset
+        now = Time.zone.now
+        offset = (now.hour * 60 + now.min) * px_per_minute
+        offset = offset + bucket_title_size if display_bucket_title
+        offset
       end
 
       private

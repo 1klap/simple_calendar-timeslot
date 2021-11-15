@@ -72,15 +72,16 @@ as `attribute: :my_start_time` and `end_attribute: :my_end_time`.
 ```
 
 Shortversion in the meantime:
-- orientation (:vertical, :horizontal, default: :vertical)
-- horizontal_height_px default: 300
-- horizonzal_scroll_split (scroll days separately or together, default: false)
-- split_by_type (model function to call in case of bucketung f.ex.`:event_type`, default: false)
-- px_per_minute default: 0.65
-- display_bucket_title (model function to call in case of bucketung f.ex.`:event_type_name`, default: false)
-- bucket_title_size default: 20
-- grid_width default: 20px
-- display_grid default: true
+- `orientation` (`:vertical`, `:horizontal`, default: :vertical)
+- `px_per_minute` (defines size of calendar, default: 0.65)
+- `horizontal_height_px` default: 300
+- `horizonzal_scroll_split` (scroll days separately or together, default: false)
+- `split_by_type` (model function to call in case of bucketing f.ex.`:event_type`, default: false)
+- `display_bucket_title` (model function to call in case of bucketing f.ex.`:event_type_name`, default: false)
+- `bucket_title_size` default: 20
+- `grid_width` default: 20px
+- `display_grid` default: true
+- `current_time_indicator` (display a stylable div across the timeline that display the current time, css-class: `current_time_indicator`, default: false)
 
 ## Development
 
