@@ -75,7 +75,7 @@ Shortversion in the meantime:
 - `orientation` (`:vertical`, `:horizontal`, default: :vertical)
 - `px_per_minute` (defines size of calendar, default: 0.65)
 - `horizontal_height_px` default: 300
-- `horizonzal_scroll_split` (scroll days separately or together, default: false)
+- `horizontal_scroll_split` (scroll days separately or together, default: false)
 - `split_by_type` (model function to call in case of bucketing f.ex.`:event_type`, default: false)
 - `display_bucket_title` (model function to call in case of bucketing f.ex.`:event_type_name`, default: false)
 - `bucket_title_size` default: 20

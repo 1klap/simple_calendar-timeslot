@@ -1,13 +1,29 @@
 .timeslot-calendar div {
   box-sizing: border-box;
 }
-.timeslot-calendar .days-wrapper-vertical {
+.timeslot-calendar .days-wrapper-vertical .days-body {
   display: flex;
   flex-direction: row;
 }
+.timeslot-calendar .days-wrapper-vertical .days-heading {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  /*position: sticky;*/
+}
+.timeslot-calendar .days-wrapper-vertical .days-heading .day-title-row{
+  flex: 1;
+}
+
 .timeslot-calendar .days-wrapper-horizontal {
   display: flex;
   flex-direction: column;
+}
+.timeslot-calendar .days-wrapper-horizontal .day-title-row {
+  display: inline-block;
+  left: 0;
+  /*position: sticky;*/
 }
 .timeslot-calendar .days-wrapper-horizontal.scroll-link {
   overflow-x: auto;

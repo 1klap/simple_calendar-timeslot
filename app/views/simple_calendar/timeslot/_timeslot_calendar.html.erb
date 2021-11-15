@@ -7,8 +7,8 @@
 
   <% if calendar.orientation == :vertical %>
     <div class="days-wrapper-vertical">
-      <% date_range.slice(0, 7).each do |day| %>
-        <div class="day-wrapper">
+      <div class="days-heading">
+        <% date_range.slice(0, 7).each do |day| %>
           <div class="day-title-row">
             <span class="day-weekday">
               <%= t('date.abbr_day_names')[day.wday] %>
@@ -17,56 +17,62 @@
               <%= day %>
             </span>
           </div>
-          <%= content_tag :div, class: calendar.td_classes_for(day) do %>
-            <div class="day-content-vertical" style="height:<%=calendar.height%>px;">
-              <% if calendar.display_grid %>
-                <div class="hour-indicator-col-vertical">
-                  <% if calendar.display_bucket_title %>
-                    <div class="bucket-title" style="height:<%=calendar.bucket_title_size%>px"></div>
-                  <% end %>
-                  <% (0..23).each do |hour| %>
-                    <div class="hour-indicator-vertical" id="hour-<%=hour %>">
-                      <%=hour%>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-              <% if calendar.display_current_time_indicator %>
-                  <div class="current_time_indicator" style="top:<%=calendar.current_time_offset %>px;left:0;right:0;height:0;"></div>
+        <% end %>
+      </div>
+      <div class="days-body">
+        <% date_range.slice(0, 7).each do |day| %>
+          <div class="day-wrapper">
+            <%= content_tag :div, class: calendar.td_classes_for(day) do %>
+              <div class="day-content-vertical" style="height:<%=calendar.height%>px;">
+                <% if calendar.display_grid %>
+                  <div class="hour-indicator-col-vertical">
+                    <% if calendar.display_bucket_title %>
+                      <div class="bucket-title" style="height:<%=calendar.bucket_title_size%>px"></div>
+                    <% end %>
+                    <% (0..23).each do |hour| %>
+                      <div class="hour-indicator-vertical" id="hour-<%=hour %>">
+                        <%=hour%>
+                      </div>
+                    <% end %>
+                  </div>
                 <% end %>
-              <% events = sorted_events.fetch(day, []) %>
-              <% buckets = calendar.split_into_buckets(events) %>
-              <div class="buckets-wrapper" style="left:<%=calendar.grid_width%>;right:0">
-                <div class="buckets-vertical">
-                  <% buckets.each do |bucket| %>
-                    <div class="bucket-wrapper">
-                      <div class="bucket-vertical">
-                        <% if calendar.display_bucket_title %>
-                          <div class="bucket-title" style="height:<%=calendar.bucket_title_size%>px">
-                            <%= bucket&.first&.send calendar.display_bucket_title %>
-                          </div>
-                        <% end %>
-                        <div class="events-wrapper">
-                          <% events_size = calendar.slot_events(bucket, day) %>
-                          <% bucket.each do |event| %>
-                            <div class="event-wrapper" style="width:<%=events_size[event][0]%>%;top:<%=events_size[event][3]%>px;left:<%=events_size[event][1]%>%;height:<%=events_size[event][2]%>px">
-                              <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
-                                <% capture_haml(event, &passed_block) %>
-                              <% else %>
-                                <% passed_block.call event %>
-                              <% end %>
+                <% if calendar.display_current_time_indicator %>
+                    <div class="current_time_indicator" style="top:<%=calendar.current_time_offset %>px;left:0;right:0;height:0;"></div>
+                  <% end %>
+                <% events = sorted_events.fetch(day, []) %>
+                <% buckets = calendar.split_into_buckets(events) %>
+                <div class="buckets-wrapper" style="left:<%=calendar.grid_width%>;right:0">
+                  <div class="buckets-vertical">
+                    <% buckets.each do |bucket| %>
+                      <div class="bucket-wrapper">
+                        <div class="bucket-vertical">
+                          <% if calendar.display_bucket_title %>
+                            <div class="bucket-title" style="height:<%=calendar.bucket_title_size%>px">
+                              <%= bucket&.first&.send calendar.display_bucket_title %>
                             </div>
                           <% end %>
+                          <div class="events-wrapper">
+                            <% events_size = calendar.slot_events(bucket, day) %>
+                            <% bucket.each do |event| %>
+                              <div class="event-wrapper" style="width:<%=events_size[event][0]%>%;top:<%=events_size[event][3]%>px;left:<%=events_size[event][1]%>%;height:<%=events_size[event][2]%>px">
+                                <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
+                                  <% capture_haml(event, &passed_block) %>
+                                <% else %>
+                                  <% passed_block.call event %>
+                                <% end %>
+                              </div>
+                            <% end %>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  <% end %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% elsif calendar.orientation == :horizontal %>
     <div class="days-wrapper-horizontal <%= calendar.horizontal_scroll_split ? "" : "scroll-link" %>">

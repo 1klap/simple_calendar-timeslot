@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.8.0] - 2021-11-15
+### Changed
+- Shuffle html layout around a bit for easier css styling like sticky
+
 ## [0.7.0] - 2021-11-15
 ### Added
 - new option to display a current time indicator line (based on Time.zone.now), that is invisible unless styled, the css-class is
