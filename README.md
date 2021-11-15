@@ -74,6 +74,7 @@ as `attribute: :my_start_time` and `end_attribute: :my_end_time`.
 Shortversion in the meantime:
 - orientation (:vertical, :horizontal, default: :vertical)
 - horizontal_height_px default: 300
+- horizonzal_scroll_split (scroll days separately or together, default: false)
 - split_by_type (model function to call in case of bucketung f.ex.`:event_type`, default: false)
 - px_per_minute default: 0.65
 - display_bucket_title (model function to call in case of bucketung f.ex.`:event_type_name`, default: false)
