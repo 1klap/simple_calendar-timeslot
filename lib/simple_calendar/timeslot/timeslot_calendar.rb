@@ -3,23 +3,20 @@ require "simple_calendar"
 module SimpleCalendar
   module Timeslot    
     class TimeslotCalendar < SimpleCalendar::Calendar
-      MINUTE_HEIGHT_PX = 0.65
-      FIRST_HOUR_SLOT = 0
-
-      def orientation
-        @options.fetch(:orientation, :vertical)
+      def layout
+        @options.fetch(:layout, :vertical)
       end
 
       def horizontal_height_px
         @options.fetch(:horizontal_height_px, 300)
       end
 
-      def split_by_type
-        @options.fetch(:split_by_type, false)
+      def bucket_by
+        @options.fetch(:bucket_by, false)
       end
 
       def px_per_minute
-        @options.fetch(:px_per_minute, TimeslotCalendar::MINUTE_HEIGHT_PX)
+        @options.fetch(:px_per_minute, 0.65)
       end
 
       def display_bucket_title
@@ -34,7 +31,7 @@ module SimpleCalendar
         end
       end
 
-      def grid_top_offset(hour)
+      def grid_offset(hour)
         4.16666667 * hour
       end
 
@@ -58,11 +55,33 @@ module SimpleCalendar
         @options.fetch(:display_current_time_indicator, false)
       end
 
+      def body_size_px
+        @options.fetch(:body_size_px, false)
+      end
+
+      def date_format_string
+        @options.fetch(:date_format_string, false)
+      end
+
+      def date_heading_format_string
+        @options.fetch(:date_heading_format_string, "%B %Y")
+      end
+
+    
+      # deprecated, remove after refactoring
       def height
         #h = (24 - TimeslotCalendar::FIRST_HOUR_SLOT) * 60 * px_per_minute
         h = 24 * 60 * px_per_minute
         h = h+bucket_title_size if display_bucket_title
         h
+      end
+
+      def body_height_style
+        body_size_px ? "height:#{body_size_px}px" : ''
+      end
+
+      def day_size
+        24 * 60 * px_per_minute
       end
 
       def event_height(event, day)
@@ -83,8 +102,9 @@ module SimpleCalendar
       end
 
       def split_into_buckets(events)
-        if split_by_type
-          events.group_by{|e| e.send split_by_type}.values
+        if bucket_by
+          return [[]] if events.size == 0
+          events.group_by{|e| e.send bucket_by}.values
         else
           [events]
         end
@@ -130,7 +150,6 @@ module SimpleCalendar
       def current_time_offset
         now = Time.zone.now
         offset = (now.hour * 60 + now.min) * px_per_minute
-        offset = offset + bucket_title_size if display_bucket_title
         offset
       end
 

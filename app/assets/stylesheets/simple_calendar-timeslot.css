@@ -1,123 +1,65 @@
 .timeslot-calendar div {
   box-sizing: border-box;
 }
-.timeslot-calendar .days-wrapper-vertical .days-body {
+.timeslot-calendar .titles-heading {
   display: flex;
   flex-direction: row;
 }
-.timeslot-calendar .days-wrapper-vertical .days-heading {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  top: 0;
-  /*position: sticky;*/
-}
-.timeslot-calendar .days-wrapper-vertical .days-heading .day-title-row{
+.timeslot-calendar .title-heading {
   flex: 1;
 }
-
-.timeslot-calendar .days-wrapper-horizontal {
+.timeslot-calendar .buckets-heading {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
-.timeslot-calendar .days-wrapper-horizontal .day-title-row {
-  display: inline-block;
-  left: 0;
-  /*position: sticky;*/
+.timeslot-calendar .bucket-heading {
+  flex: 1;
 }
-.timeslot-calendar .days-wrapper-horizontal.scroll-link {
-  overflow-x: auto;
-  overflow-y: hidden;
+.timeslot-calendar .calendar-body {
+  display: flex;
+  flex-direction: row;
+  overflow-y: scroll;
 }
 .timeslot-calendar .day-wrapper {
-  flex: 1 1 0;
+  flex: 1;
 }
-.timeslot-calendar .day-content-vertical {
+.timeslot-calendar .day-body {
+  /*flex: 1;*/
+  position: relative;
+  /*overflow-y: scroll;*/
+}
+.timeslot-calendar .hour-indicator-wrapper {
   display: flex;
   flex-direction: column;
-  position: relative;
-}
-.timeslot-calendar .day-content-horizontal {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-.timeslot-calendar .day-content-horizontal.scroll-split {
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-.timeslot-calendar .day-content-horizontal-inner {
-  position: relative;
-}
-.timeslot-calendar .hour-indicator-col-vertical {
-  display: flex;
-  flex: 1 1 0;
-  flex-direction: column;
-  z-index: 0;
-}
-.timeslot-calendar .hour-indicator-col-horizontal {
-  display: flex;
-  flex: 1 1 0;
-  flex-direction: row;
   height: 100%;
-  z-index: 0;
+  position: relative;
 }
-.timeslot-calendar .hour-indicator-vertical {
+.timeslot-calendar .hour-indicator-cell {
+  min-height: 0;
+  flex: 1;
   border-style: solid;
-  flex: 1 1 0;
   border-width: 2px 0 0;
   border-color: rgba(229, 231, 235, 0.5);
-  box-sizing: border-box;
 }
-.timeslot-calendar .hour-indicator-horizontal {
-  border-style: solid;
-  flex: 1 1 0;
-  border-width: 0 0 0 2px;
-  border-color: rgba(229, 231, 235, 0.5);
-  box-sizing: border-box;
+.timeslot-calendar .hour-indicator {
+  font-size: 1rem;
+}
+.timeslot-calendar .current-time-indicator {
+  position: absolute;
+  border: solid 1px rgba(0, 0, 0, 0.5);;
 }
 .timeslot-calendar .buckets-wrapper {
   position: absolute;
-
-}
-.timeslot-calendar .buckets-vertical {
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
-.timeslot-calendar .buckets-horizontal {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-}
-.timeslot-calendar .bucket-wrapper {
-  flex: 1 1 0;
-}
-.timeslot-calendar .bucket-horizontal {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: row;
-}
-.timeslot-calendar .bucket-inner-horizontal {
-  position: relative;
-}
-.timeslot-calendar .events-wrapper {
+.timeslot-calendar .bucket {
+  flex: 1;
   position: relative;
 }
 .timeslot-calendar .event-wrapper {
   position: absolute;
-  z-index: 1;
-  box-sizing: border-box;
-}
-.timeslot-calendar .current_time_indicator {
-  position: absolute;
-}
-/*--- Event example style ----*/
-.timeslot-event {
-  width: 100%;
-  height: 100%;
-  border-width: 2px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.5);
-  border-radius: 0.25rem;
-  background-color: white;
+  border: solid 1px black;
+  z-index: 2;
 }
