@@ -70,8 +70,7 @@ module SimpleCalendar
       def date_heading_format_string
         @options.fetch(:date_heading_format_string, "%B %Y")
       end
-
-    
+      
       # deprecated, remove after refactoring
       def height
         #h = (24 - TimeslotCalendar::FIRST_HOUR_SLOT) * 60 * px_per_minute
