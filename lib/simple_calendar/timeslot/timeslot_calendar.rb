@@ -59,6 +59,10 @@ module SimpleCalendar
         @options.fetch(:body_size_px, false)
       end
 
+      def day_height_px
+        @options.fetch(:day_height_px, 200)
+      end
+
       def date_format_string
         @options.fetch(:date_format_string, false)
       end
@@ -76,8 +80,23 @@ module SimpleCalendar
         h
       end
 
+      # deprecated, remove after refactoring
       def body_height_style
-        body_size_px ? "height:#{body_size_px}px" : ''
+        (body_size_px && (layout == :vertical)) ? "height:#{body_size_px}px" : ''
+      end
+
+      def body_style
+        if layout == :vertical
+          body_size_px ? "height:#{body_size_px}px" : ''
+        elsif layout == :horizontal
+          'height:100%'
+        else
+          ''
+        end
+      end
+
+      def day_height_style
+        layout == :horizontal ? "height:#{day_height_px}px;" : ""
       end
 
       def day_size

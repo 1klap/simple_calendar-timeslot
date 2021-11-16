@@ -11,7 +11,7 @@
     <div class="titles-heading">
     <% event_map = date_range.map { |day| calendar.split_into_buckets(sorted_events.fetch(day, [])) } %>
     <% date_range.each_with_index do |day, index| %>
-      <div class="title-heading">
+      <div class="title-heading" style="<%=calendar.day_height_style%>">
         <div class="day-heading">
           <span class="day-weekday">
             <%= t('date.abbr_day_names')[day.wday] %>
@@ -22,7 +22,11 @@
         </div>
         <% if calendar.display_bucket_title %>
         <div class="buckets-heading">
+          <% if calendar.layout == :vertical %>
           <div style="width:<%=calendar.grid_width%>"></div>
+          <% else %>
+          <div style="height:<%=calendar.grid_width%>"></div>
+          <% end %>
           <% event_map[index].each do |bucket| %>
           <div class="bucket-heading">
             <%= bucket&.first&.send calendar.display_bucket_title %>
@@ -33,10 +37,14 @@
       </div>
     <% end %>
     </div>
-    <div class="calendar-body" style="<%=calendar.body_height_style%>" >
+    <div class="calendar-body" style="<%=calendar.body_style%>" >
     <% event_map.each_with_index do |buckets, index| %>
       <div class="day-wrapper">
+        <% if calendar.layout == :vertical %>
         <div class="day-body" style="height:<%=calendar.day_size%>px">
+        <% else %>
+        <div class="day-body" style="width:<%=calendar.day_size%>px;height:<%=calendar.day_height_px%>px">
+        <% end %>
           <% if calendar.display_grid %>
           <div class="hour-indicator-wrapper">
           <% (0..23).each do |hour| %>
@@ -49,14 +57,26 @@
           </div>
           <% end %>
           <% if calendar.display_current_time_indicator %>
+            <% if calendar.layout == :vertical %>
             <div class="current-time-indicator" style="top:<%=calendar.current_time_offset %>px;left:0;right:0;height:0;"></div>
+            <% else %>
+            <div class="current-time-indicator" style="left:<%=calendar.current_time_offset %>px;top:0;bottom:0;width:0;"></div>
+            <% end %>
           <% end %>
+          <% if calendar.layout == :vertical %>
           <div class="buckets-wrapper" style="left:<%=calendar.grid_width%>;right:0;top:0;bottom:0;">
+          <% else %>
+          <div class="buckets-wrapper" style="top:<%=calendar.grid_width%>;right:0;left:0;bottom:0;">
+          <% end %>
           <% buckets.each do |bucket| %>
             <div class="bucket"> 
               <% events_size = calendar.slot_events(bucket, date_range[index]) %>
               <% bucket.each do |event| %>
+              <% if calendar.layout == :vertical %>
               <div class="event-wrapper" style="width:<%=events_size[event][0]%>%;top:<%=events_size[event][3]%>px;left:<%=events_size[event][1]%>%;height:<%=events_size[event][2]%>px">
+              <% else %>
+              <div class="event-wrapper" style="height:<%=events_size[event][0]%>%;left:<%=events_size[event][3]%>px;top:<%=events_size[event][1]%>%;width:<%=events_size[event][2]%>px">
+              <% end %>
                 <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
                   <% capture_haml(event, &passed_block) %>
                 <% else %>

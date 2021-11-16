@@ -58,6 +58,45 @@
   flex: 1;
   position: relative;
 }
+/******* Layout: Horizontal **********/
+.timeslot-calendar .orientation-wrapper.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+.timeslot-calendar .orientation-wrapper.horizontal .titles-heading {
+  flex-direction: column;
+}
+.timeslot-calendar .orientation-wrapper.horizontal .title-heading {
+  flex: none;
+  display: flex;
+  flex-direction: row;
+}
+.timeslot-calendar .orientation-wrapper.horizontal .day-heading {
+  flex: 1;
+}
+.timeslot-calendar .orientation-wrapper.horizontal .buckets-heading {
+  flex-direction: column;
+}
+.timeslot-calendar .orientation-wrapper.horizontal .calendar-body {
+  flex: 1;
+  flex-direction: column;
+  overflow-x: scroll;
+}
+.timeslot-calendar .orientation-wrapper.horizontal .day-body div {
+  /*border: solid 1px black;
+  padding: 1px;*/
+}
+.timeslot-calendar .orientation-wrapper.horizontal .buckets-wrapper {
+  flex-direction: column;
+}
+.timeslot-calendar .orientation-wrapper.horizontal .hour-indicator-wrapper {
+  flex-direction: row;
+}
+.timeslot-calendar .orientation-wrapper.horizontal .hour-indicator-cell {
+  border-width: 0 0 0 2px;
+}
+
+/*****************/
 .timeslot-calendar .event-wrapper {
   position: absolute;
   border: solid 1px black;
