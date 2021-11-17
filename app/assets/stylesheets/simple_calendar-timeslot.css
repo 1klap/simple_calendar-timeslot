@@ -1,3 +1,7 @@
+/******* Default styling overwrite me! *******/
+.tscal-current-time-indicator {
+  border: solid 1px rgba(0, 0, 0, 0.5);;
+}
 /******* Layout: Base (==Vertical) *******/
 .timeslot-calendar div {
   box-sizing: border-box;
@@ -40,9 +44,8 @@
   border-width: 2px 0 0;
   border-color: rgba(229, 231, 235, 0.5);
 }
-.timeslot-calendar .current-time-indicator {
+.timeslot-calendar .tscal-current-time-indicator {
   position: absolute;
-  border: solid 1px rgba(0, 0, 0, 0.5);;
 }
 .timeslot-calendar .buckets-wrapper {
   position: absolute;
@@ -53,6 +56,13 @@
 .timeslot-calendar .bucket {
   flex: 1;
   position: relative;
+}
+.timeslot-calendar .event-wrapper {
+  position: absolute;
+}
+/******* Layout: Vertical specific *******/
+.timeslot-calendar .orientation-wrapper.vertical .hour-indicator {
+  text-align: center;
 }
 /******* Layout: Horizontal *******/
 .timeslot-calendar .orientation-wrapper.horizontal {
@@ -108,10 +118,4 @@
 }
 .timeslot-calendar .orientation-wrapper.horizontal_date_on_top .hour-indicator-cell {
   border-width: 0 0 0 2px;
-}
-/******* Default styling for event wrapper *******/
-.timeslot-calendar .event-wrapper {
-  position: absolute;
-  border: solid 1px black;
-  z-index: 2;
 }

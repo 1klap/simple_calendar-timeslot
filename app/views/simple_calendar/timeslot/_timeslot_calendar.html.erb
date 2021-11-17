@@ -64,9 +64,9 @@
           <% end %>
           <% if calendar.display_current_time_indicator %>
             <% if calendar.layout == :vertical %>
-            <div class="current-time-indicator" style="top:<%=calendar.current_time_offset %>px;left:0;right:0;height:0;"></div>
+            <div class="tscal-current-time-indicator" style="top:<%=calendar.current_time_offset %>px;left:0;right:0;height:0;"></div>
             <% else %>
-            <div class="current-time-indicator" style="left:<%=calendar.current_time_offset %>px;top:0;bottom:0;width:0;"></div>
+            <div class="tscal-current-time-indicator" style="left:<%=calendar.current_time_offset %>px;top:0;bottom:0;width:0;"></div>
             <% end %>
           <% end %>
           <% if calendar.layout == :vertical %>
@@ -145,7 +145,7 @@
               </div>
               <% end %>
               <% if calendar.display_current_time_indicator %>
-                <div class="current-time-indicator" style="left:<%=calendar.current_time_offset %>px;top:0;bottom:0;width:0;"></div>
+                <div class="tscal-current-time-indicator" style="left:<%=calendar.current_time_offset %>px;top:0;bottom:0;width:0;"></div>
               <% end %>
               <div class="buckets-wrapper" style="top:<%=calendar.grid_width%>;right:0;left:0;bottom:0;">
               <% buckets.each do |bucket| %>

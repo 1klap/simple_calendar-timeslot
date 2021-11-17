@@ -3,24 +3,29 @@ require "simple_calendar"
 module SimpleCalendar
   module Timeslot    
     class TimeslotCalendar < SimpleCalendar::Calendar
+
       def layout
         @options.fetch(:layout, :vertical)
-      end
-
-      def horizontal_height_px
-        @options.fetch(:horizontal_height_px, 300)
-      end
-
-      def bucket_by
-        @options.fetch(:bucket_by, false)
       end
 
       def px_per_minute
         @options.fetch(:px_per_minute, 0.65)
       end
 
-      def display_bucket_title
-        @options.fetch(:display_bucket_title, false)
+      def display_grid
+        @options.fetch(:display_grid, true)
+      end
+      
+      def grid_width
+        if display_grid
+          @options.fetch(:grid_width, "20px")
+        else
+          0
+        end
+      end
+
+      def display_current_time_indicator
+        @options.fetch(:display_current_time_indicator, false)
       end
 
       def bucket_title_size
@@ -31,32 +36,20 @@ module SimpleCalendar
         end
       end
 
-      def grid_width
-        if display_grid
-          @options.fetch(:grid_width, "20px")
-        else
-          0
-        end
-      end
-
-      def display_grid
-        @options.fetch(:display_grid, true)
-      end
-
-      def horizontal_scroll_split
-        @options.fetch(:horizontal_scroll_split, false)
-      end
-
-      def display_current_time_indicator
-        @options.fetch(:display_current_time_indicator, false)
-      end
-
       def body_size_px
         @options.fetch(:body_size_px, false)
       end
 
       def day_height_px
         @options.fetch(:day_height_px, 200)
+      end
+
+      def bucket_by
+        @options.fetch(:bucket_by, false)
+      end
+
+      def display_bucket_title
+        @options.fetch(:display_bucket_title, false)
       end
 
       def date_format_string
