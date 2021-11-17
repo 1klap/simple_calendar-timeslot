@@ -50,10 +50,11 @@
           <% if calendar.display_grid %>
           <div class="hour-indicator-wrapper">
           <% (0..23).each do |hour| %>
-            <div class="hour-indicator-cell" id="hour-<%=hour %>">
             <% if calendar.layout == :vertical %>
+            <div class="hour-indicator-cell tscal-vertical tscal-hour-cell" id="hour-<%=hour %>">
               <div class="hour-indicator" style="width:<%=calendar.grid_width%>">
             <% else %>
+            <div class="hour-indicator-cell tscal-horizontal tscal-hour-cell" id="hour-<%=hour %>">
               <div class="hour-indicator" style="height:<%=calendar.grid_width%>">
             <% end %>
                 <%=hour%>
@@ -79,9 +80,9 @@
               <% events_size = calendar.slot_events(bucket, date_range[index]) %>
               <% bucket.each do |event| %>
               <% if calendar.layout == :vertical %>
-              <div class="event-wrapper" style="width:<%=events_size[event][0]%>%;top:<%=events_size[event][3]%>px;left:<%=events_size[event][1]%>%;height:<%=events_size[event][2]%>px">
+              <div class="event-wrapper tscal-event-wrapper" style="width:<%=events_size[event][0]%>%;top:<%=events_size[event][3]%>px;left:<%=events_size[event][1]%>%;height:<%=events_size[event][2]%>px">
               <% else %>
-              <div class="event-wrapper" style="height:<%=events_size[event][0]%>%;left:<%=events_size[event][3]%>px;top:<%=events_size[event][1]%>%;width:<%=events_size[event][2]%>px">
+              <div class="event-wrapper tscal-event-wrapper" style="height:<%=events_size[event][0]%>%;left:<%=events_size[event][3]%>px;top:<%=events_size[event][1]%>%;width:<%=events_size[event][2]%>px">
               <% end %>
                 <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
                   <% capture_haml(event, &passed_block) %>
@@ -136,7 +137,7 @@
               <% if calendar.display_grid %>
               <div class="hour-indicator-wrapper">
               <% (0..23).each do |hour| %>
-                <div class="hour-indicator-cell" id="hour-<%=hour %>">
+                <div class="hour-indicator-cell tscal-horizontal tscal-hour-cell" id="hour-<%=hour %>">
                   <div class="hour-indicator" style="height:<%=calendar.grid_width%>">
                     <%=hour%>
                   </div>
@@ -152,7 +153,7 @@
                 <div class="bucket"> 
                   <% events_size = calendar.slot_events(bucket, date_range[index]) %>
                   <% bucket.each do |event| %>
-                  <div class="event-wrapper" style="height:<%=events_size[event][0]%>%;left:<%=events_size[event][3]%>px;top:<%=events_size[event][1]%>%;width:<%=events_size[event][2]%>px">
+                  <div class="event-wrapper tscal-event-wrapper" style="height:<%=events_size[event][0]%>%;left:<%=events_size[event][3]%>px;top:<%=events_size[event][1]%>%;width:<%=events_size[event][2]%>px">
                     <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
                       <% capture_haml(event, &passed_block) %>
                     <% else %>

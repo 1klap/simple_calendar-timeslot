@@ -7,6 +7,8 @@
     - `orientation` has been removed for `layout`
     - `split_by_type` has been renamed to `bucket_by`
     - `horizontal_height_px` has been renamed to `day_height_px`
+    - `horizontal_scroll_split` is now possible with a separate layout
+    - `bucket_title_size` has been removed, the size is determined by the size of the DOM-elements
 ### Added
 - New Layout `horizontal_date_on_top`
 - New option `body_size_px` that limits the calendar body height if set and makes it scrollable.

@@ -125,8 +125,9 @@ If you use an SCSS file (`application.scss`), add the following line instead:
 
 Include a code snipped like the one below anywhere in your `.html.erb` file, set `@events` in your calling controller to be a collection of your model object to be displayed. You can refer to the documentation on [simple_calendar/Rendering_Events](https://github.com/excid3/simple_calendar#rendering-events) (thats from the gem on which this one is built on top of), the complete paragraph applies to this gem as well.
 
-Your model must implement a `start_time` and `end_time` function that returns a datetime,
-or you can specify alternatives as options to the call below
+All options are optional, below you see all possible values commented out with their default value behind the colon and a short description afterwards.
+
+Your model must implement a `start_time` and `end_time` function that returns a datetime, or you can specify alternatives as options to the call below
 as `attribute: :my_start_time` and `end_attribute: :my_end_time` (without the `#` of course).
 
 ```erb
@@ -136,44 +137,35 @@ as `attribute: :my_start_time` and `end_attribute: :my_end_time` (without the `#
                       # px_per_minute: 0.65, # define size of one minute
                       # display_grid: true, 
                       # grid_width: "20px", # can be any valid css size px, %, em
-                      # display_current_time_indicator: false,
-                      # body_size_px: false,
-                      # day_height_px: 200,
-                      # bucket_by: false,
+                      # display_current_time_indicator: false, # draw a line to show the current time, stylable class: tscal-current-time-indicator
+                      # body_size_px: false, # only vertical layout: set integer if your want to limit the height
+                      # day_height_px: 200, # only horizontal and horizontal_date_on_top layout: set height for a day
+                      # bucket_by: false, # give model function as symbol if you want to bucket events by this function (f.ex. :event_type)
                       # display_bucket_title: false,
                       # date_format_string: false,
                       # date_heading_format_string: "%B %Y",
-                      # attribute: :my_start_time,
-                      # end_attribute: :my_end_time,
+                      # attribute: :my_start_time, # provide alternative to :start_time model function 
+                      # end_attribute: :my_end_time, # provide alternative to :end_time model function 
                      ) do |event| %>
   <div class="timeslot-event">
     <%= event.title %>
   </div>
 <% end %>
 ```
-layout: :vertical
-      bucket_by: false
-      px_per_minute: 0.65
-      display_bucket_title: false
-      grid_width: "20px"
-      display_grid: true
-      display_current_time_indicator: false
-      body_size_px: false
-      day_height_px: 200
-      date_format_string: false
-      date_heading_format_string: "%B %Y"
 
-Shortversion in the meantime:
-- `orientation` (`:vertical`, `:horizontal`, default: :vertical)
-- `px_per_minute` (defines size of calendar, default: 0.65)
-- `horizontal_height_px` default: 300
-- `horizontal_scroll_split` (scroll days separately or together, default: false)
-- `split_by_type` (model function to call in case of bucketing f.ex.`:event_type`, default: false)
-- `display_bucket_title` (model function to call in case of bucketing f.ex.`:event_type_name`, default: false)
-- `bucket_title_size` default: 20
-- `grid_width` default: 20px
-- `display_grid` default: true
-- `display_current_time_indicator` (display a stylable div across the timeline that display the current time, css-class: `current_time_indicator`, default: false)
+## Customization
+
+Style away as much as you want. This gem is mainly concerned to move the right pieces to the right place, how they look is up to you. Have a look
+at the generated HTML or start with these classes
+- `.tscal-event-wrapper`
+- `.tscal-current-time-indicator`
+- `.tscal-hour-cell`
+
+Some words of caution: overflow is hidden for the scrolling part of the calendar, that is a div with class `.buckets-wrapper`. If you see your box-shadows clipped, that is probably causing it. You can of course overwrite clipping (with `.timeslot-calendar .buckets-wrapper { overflow: visible; }`), but then I recommend setting `overflow: hidden;` on `.tscal-event-wrapper`, otherwise you risk to see scrolling where you don't want to, when to content of the event is overflowing.
+
+Here is an example with some basic styling
+
+![Styled calendar](https://raw.githubusercontent.com/1klap/simple_calendar-timeslot/c844c11f99c51f1b44bab825943615c295acde29/img/simple_calendar-timeslot_styled.png)
 
 ## Development
 
@@ -183,4 +175,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
+I could use some help with the test suite.
 Bug reports and pull requests are welcome on GitHub at https://github.com/1klap/simple_calendar-timeslot.
