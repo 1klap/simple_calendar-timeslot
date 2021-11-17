@@ -1,3 +1,4 @@
+/******* Layout: Base (==Vertical) *******/
 .timeslot-calendar div {
   box-sizing: border-box;
 }
@@ -24,9 +25,7 @@
   flex: 1;
 }
 .timeslot-calendar .day-body {
-  /*flex: 1;*/
   position: relative;
-  /*overflow-y: scroll;*/
 }
 .timeslot-calendar .hour-indicator-wrapper {
   display: flex;
@@ -40,9 +39,6 @@
   border-style: solid;
   border-width: 2px 0 0;
   border-color: rgba(229, 231, 235, 0.5);
-}
-.timeslot-calendar .hour-indicator {
-  font-size: 1rem;
 }
 .timeslot-calendar .current-time-indicator {
   position: absolute;
@@ -58,7 +54,7 @@
   flex: 1;
   position: relative;
 }
-/******* Layout: Horizontal **********/
+/******* Layout: Horizontal *******/
 .timeslot-calendar .orientation-wrapper.horizontal {
   display: flex;
   flex-direction: row;
@@ -82,10 +78,6 @@
   flex-direction: column;
   overflow-x: scroll;
 }
-.timeslot-calendar .orientation-wrapper.horizontal .day-body div {
-  /*border: solid 1px black;
-  padding: 1px;*/
-}
 .timeslot-calendar .orientation-wrapper.horizontal .buckets-wrapper {
   flex-direction: column;
 }
@@ -95,8 +87,29 @@
 .timeslot-calendar .orientation-wrapper.horizontal .hour-indicator-cell {
   border-width: 0 0 0 2px;
 }
-
-/*****************/
+/******* Layout: Horizontal - Date On Top *******/
+.timeslot-calendar .orientation-wrapper.horizontal_date_on_top .body-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.timeslot-calendar .orientation-wrapper.horizontal_date_on_top .buckets-heading {
+  flex-direction: column;
+}
+.timeslot-calendar .orientation-wrapper.horizontal_date_on_top .calendar-body {
+  flex: 1;
+  flex-direction: column;
+  overflow-x: scroll;
+}
+.timeslot-calendar .orientation-wrapper.horizontal_date_on_top .buckets-wrapper {
+  flex-direction: column;
+}
+.timeslot-calendar .orientation-wrapper.horizontal_date_on_top .hour-indicator-wrapper {
+  flex-direction: row;
+}
+.timeslot-calendar .orientation-wrapper.horizontal_date_on_top .hour-indicator-cell {
+  border-width: 0 0 0 2px;
+}
+/******* Default styling for event wrapper *******/
 .timeslot-calendar .event-wrapper {
   position: absolute;
   border: solid 1px black;

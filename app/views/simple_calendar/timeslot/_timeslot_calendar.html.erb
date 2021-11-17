@@ -13,12 +13,14 @@
     <% date_range.each_with_index do |day, index| %>
       <div class="title-heading <%=calendar.td_classes_for(day).join(' ')%>" style="<%=calendar.day_height_style%>">
         <div class="day-heading">
-          <span class="day-weekday">
-            <%= t('date.abbr_day_names')[day.wday] %>
-          </span>
-          <span class="day-date">
-            <%= calendar.date_format_string ? day.strftime(calendar.date_format_string) : day %>
-          </span>
+          <div class="day-heading-inner">
+            <span class="day-weekday">
+              <%= t('date.abbr_day_names')[day.wday] %>
+            </span>
+            <span class="day-date">
+              <%= calendar.date_format_string ? day.strftime(calendar.date_format_string) : day %>
+            </span>
+          </div>
         </div>
         <% if calendar.display_bucket_title %>
         <div class="buckets-heading">
@@ -49,7 +51,11 @@
           <div class="hour-indicator-wrapper">
           <% (0..23).each do |hour| %>
             <div class="hour-indicator-cell" id="hour-<%=hour %>">
+            <% if calendar.layout == :vertical %>
               <div class="hour-indicator" style="width:<%=calendar.grid_width%>">
+            <% else %>
+              <div class="hour-indicator" style="height:<%=calendar.grid_width%>">
+            <% end %>
                 <%=hour%>
               </div>
             </div>
@@ -93,7 +99,78 @@
     </div>
   </div>
   <% elsif calendar.layout == :horizontal_date_on_top %>
-    This is HORIZONTAL_DATE_ON_TOP
+  <div class="orientation-wrapper <%=calendar.layout%>">
+    <% event_map = date_range.map { |day| calendar.split_into_buckets(sorted_events.fetch(day, [])) } %>
+    <% date_range.each_with_index do |day, index| %>
+    <div class="outer-day-wrapper <%=calendar.td_classes_for(day).join(' ')%>">
+      <div class="day-heading">
+        <div class="day-heading-inner">
+          <span class="day-weekday">
+            <%= t('date.abbr_day_names')[day.wday] %>
+          </span>
+          <span class="day-date">
+            <%= calendar.date_format_string ? day.strftime(calendar.date_format_string) : day %>
+          </span>
+        </div>
+      </div>
+      <div class="body-wrapper">
+        <% if calendar.display_bucket_title %>
+        <div class="buckets-heading">
+          <% if calendar.layout == :vertical %>
+          <div style="width:<%=calendar.grid_width%>"></div>
+          <% else %>
+          <div style="height:<%=calendar.grid_width%>"></div>
+          <% end %>
+          <% event_map[index].each do |bucket| %>
+          <div class="bucket-heading">
+            <%= bucket&.first&.send calendar.display_bucket_title %>
+          </div>
+          <% end %>
+        </div>
+        <% end %>
+
+        <div class="calendar-body" style="<%=calendar.body_style%>" >
+        <% buckets = event_map[index] %>
+          <div class="day-wrapper">
+            <div class="day-body <%=calendar.td_classes_for(date_range[index]).join(' ')%>" style="width:<%=calendar.day_size%>px;height:<%=calendar.day_height_px%>px">
+              <% if calendar.display_grid %>
+              <div class="hour-indicator-wrapper">
+              <% (0..23).each do |hour| %>
+                <div class="hour-indicator-cell" id="hour-<%=hour %>">
+                  <div class="hour-indicator" style="height:<%=calendar.grid_width%>">
+                    <%=hour%>
+                  </div>
+                </div>
+              <% end %>
+              </div>
+              <% end %>
+              <% if calendar.display_current_time_indicator %>
+                <div class="current-time-indicator" style="left:<%=calendar.current_time_offset %>px;top:0;bottom:0;width:0;"></div>
+              <% end %>
+              <div class="buckets-wrapper" style="top:<%=calendar.grid_width%>;right:0;left:0;bottom:0;">
+              <% buckets.each do |bucket| %>
+                <div class="bucket"> 
+                  <% events_size = calendar.slot_events(bucket, date_range[index]) %>
+                  <% bucket.each do |event| %>
+                  <div class="event-wrapper" style="height:<%=events_size[event][0]%>%;left:<%=events_size[event][3]%>px;top:<%=events_size[event][1]%>%;width:<%=events_size[event][2]%>px">
+                    <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
+                      <% capture_haml(event, &passed_block) %>
+                    <% else %>
+                      <% passed_block.call event %>
+                    <% end %>
+                  </div>
+                  <% end %>
+                </div>
+              <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% end %>
+  </div>
   <% else %>
     <div>Unsupported layout for timeslot_calendar, please contact your webdeveloper</div>
   <% end %>

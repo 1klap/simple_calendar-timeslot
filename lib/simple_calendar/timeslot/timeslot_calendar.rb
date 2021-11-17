@@ -31,10 +31,6 @@ module SimpleCalendar
         end
       end
 
-      def grid_offset(hour)
-        4.16666667 * hour
-      end
-
       def grid_width
         if display_grid
           @options.fetch(:grid_width, "20px")
@@ -69,19 +65,6 @@ module SimpleCalendar
 
       def date_heading_format_string
         @options.fetch(:date_heading_format_string, "%B %Y")
-      end
-      
-      # deprecated, remove after refactoring
-      def height
-        #h = (24 - TimeslotCalendar::FIRST_HOUR_SLOT) * 60 * px_per_minute
-        h = 24 * 60 * px_per_minute
-        h = h+bucket_title_size if display_bucket_title
-        h
-      end
-
-      # deprecated, remove after refactoring
-      def body_height_style
-        (body_size_px && (layout == :vertical)) ? "height:#{body_size_px}px" : ''
       end
 
       def body_style
