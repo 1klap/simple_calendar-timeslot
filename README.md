@@ -23,12 +23,7 @@ All layouts support the following options:
 - turn current time indicator on/off, this is an invisible css-stylable div with class `tscal-current-time-indicator` (can be seen in examples below)
 - by default, the 24h-grid hides any overflow which is recommended not to overwrite, otherwise there might be 2-directional scrolling
 
-**Note:** events are styled in the examples with the following minimalistic styles to show their outline. This is not the case when the gem is used out of the box, because it would make the style hard to overwrite because of css-predence rules.
-```css
-.event-wrapper {
-  border: solid 1px black;
-}
-```
+**Note:** styling is kept to a minimum on purpose to allow for easier customization. An example with some more styles can be found in the section Customization.
 
 ### Vertical layout
 This layout grows vertically, and can be limited in height by option `body_size_px` and will then scroll.
