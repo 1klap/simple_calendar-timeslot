@@ -1,5 +1,19 @@
 ## [Unreleased]
 
+## [0.90.0] - 2021-11-17
+### Changed
+- **Mayor changes** to complete html layout
+- **Option arguments changed**:
+    - `orientation` has been removed for `layout`
+    - `split_by_type` has been renamed to `bucket_by`
+    - `horizontal_height_px` has been renamed to `day_height_px`
+### Added
+- New Layout `horizontal_date_on_top`
+- New option `body_size_px` that limits the calendar body height if set and makes it scrollable.
+- New option `date_format_string`, that applies the format string before displaying the date above each day
+- New option `date_header_format_string`, that applies the format string before displaying the `start_date` url parameter in the heading of the calendar (between previos and next links)
+
+
 ## [0.8.0] - 2021-11-15
 ### Changed
 - Shuffle html layout around a bit for easier css styling like sticky
